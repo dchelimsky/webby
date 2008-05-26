@@ -113,5 +113,4 @@ tasks/rdoc.rake
 tasks/rubyforge.rake
 tasks/setup.rb
 tasks/spec.rake
-tasks/svn.rake
 tasks/website.rake
