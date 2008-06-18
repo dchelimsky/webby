@@ -18,7 +18,7 @@ Logging::Appender.stdout.layout = Logging::Layouts::Pattern.new(
 module Webby
 
   # :stopdoc:
-  VERSION = '0.8.3'   # :nodoc:
+  VERSION = '0.9.0'   # :nodoc:
   LIBPATH = ::File.expand_path(::File.dirname(__FILE__)) + ::File::SEPARATOR
   PATH = ::File.dirname(LIBPATH) + ::File::SEPARATOR
   # :startdoc:
@@ -55,7 +55,11 @@ module Webby
       :user       => ENV['USER'] || ENV['USERNAME'],
       :host       => 'example.com',
       :remote_dir => '/not/a/valid/dir',
-      :rsync_args => %w(-av --delete),
+      :rsync_args => %w(-av),
+
+      # Global options for HAML and SASS
+      :haml_options => {},
+      :sass_options => {},
 
       # Options passed to the 'tidy' program when the tidy filter is used
       :tidy_options => '-indent -wrap 80',
@@ -181,6 +185,18 @@ module Webby
 
     Dir.glob(search_me).sort.each {|rb| require rb}
   end
+
+  # Prints a deprecation warning using the logger. The message states that
+  # the given method is being deprecated. An optional message can be give to
+  # -- somthing nice and fuzzy about a new method or why this one has to go
+  # away; sniff, we'll miss you little buddy.
+  #
+  def self.deprecated( method, message = nil )
+    msg = "'#{method}' has been deprecated"
+    msg << "\n\t#{message}" unless message.nil?
+    Logging::Logger['Webby'].warn msg
+  end
+
 end  # module Webby
 
 

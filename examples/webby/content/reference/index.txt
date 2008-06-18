@@ -189,7 +189,7 @@ end
 <%% end -%>
 </pre>
 
-<% uv :lang => 'ruby', :line_numbers => true, :theme => 'twilight' do -%>
+<% uv :lang => "ruby", :line_numbers => true, :theme => 'twilight' do -%>
 # Initializer for the class.
 def initialize( string )
   @str = string
